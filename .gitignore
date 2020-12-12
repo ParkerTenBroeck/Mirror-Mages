@@ -1,3 +1,16 @@
+/*
+!/src/
+!/extern/
+!/res/
+!/README.md
+!.gitignore
+!.gitattributes
+!.Mirror Mages.sln
+!.Mirror Mages.vcxproj
+!.Mirror Mages.vcxproj.filters
+!.CppProperties.json
+
+
 # Prerequisites
 *.d
 
