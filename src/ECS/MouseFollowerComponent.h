@@ -19,7 +19,7 @@ public:
 		this->followDistance = _followDistance;
 	}
 
-	void onUserUpdate(float elapsedTime, olc::PixelGameEngine* context) {
+	void onUserUpdate(float elapsedTime, MirrorMages* context) {
 		olc::vf2d mouse = { (float)context->GetMouseX(), (float)context->GetMouseY() };
 
 		{ //draws mouse thing?????

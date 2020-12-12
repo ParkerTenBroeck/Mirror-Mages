@@ -7,7 +7,7 @@
 #include <bitset>
 #include <array>
 
-#include "extern/olc/include/olcPixelGameEngine.h"
+#include "MirrorMages.h"
 
 class EntityComponent;
 class Entity;
@@ -34,9 +34,9 @@ public:
 	Entity* entity;
 
 	virtual void init() {}
-	virtual void update(float elapsedTime, olc::PixelGameEngine* context) {}
-	virtual void draw(float elapsedTime, olc::PixelGameEngine* context) {}
-	virtual void onUserUpdate(float elapsedTime, olc::PixelGameEngine* context) {}
+	virtual void update(float elapsedTime, MirrorMages* context) {}
+	virtual void draw(float elapsedTime, MirrorMages* context) {}
+	virtual void onUserUpdate(float elapsedTime, MirrorMages* context) {}
 
 	virtual ~EntityComponent(){}
 };
@@ -50,15 +50,15 @@ private:
 	ComponentBitSet componentBitSet;
 
 public:
-	void update(float elapsedTime, olc::PixelGameEngine* context) {
+	void update(float elapsedTime, MirrorMages* context) {
 		for (auto& c : components) c->update(elapsedTime, context);
 	}
 
-	void draw(float elapsedTime, olc::PixelGameEngine* context) {
+	void draw(float elapsedTime, MirrorMages* context) {
 		for (auto& c : components) c->draw(elapsedTime, context);
 	}
 
-	void onUserUpdate(float elapsedTime, olc::PixelGameEngine* context) {
+	void onUserUpdate(float elapsedTime, MirrorMages* context) {
 		for (auto& c : components) c->onUserUpdate(elapsedTime, context);
 	}
 
@@ -95,14 +95,14 @@ private:
 	std::vector<std::unique_ptr<Entity>> entities;
 
 public:
-	void update(float elapsedTime, olc::PixelGameEngine* context) {
+	void update(float elapsedTime, MirrorMages* context) {
 		for (auto& e : entities) e->update(elapsedTime, context);
 	}
-	void draw(float elapsedTime, olc::PixelGameEngine* context) {
+	void draw(float elapsedTime, MirrorMages* context) {
 		for (auto& e : entities) e->draw(elapsedTime, context);
 	}
 
-	void onUserUpdate(float elapsedTime, olc::PixelGameEngine* context) {
+	void onUserUpdate(float elapsedTime, MirrorMages* context) {
 		for (auto& e : entities) e->onUserUpdate(elapsedTime, context);
 	}
 

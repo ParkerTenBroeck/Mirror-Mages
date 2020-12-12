@@ -11,7 +11,7 @@ private:
 public:
 	const int speed = 50;
 
-	void onUserUpdate(float elapsedTime, olc::PixelGameEngine* context) override {
+	void onUserUpdate(float elapsedTime, MirrorMages* context) override {
 
 		{
 			static float timeCounter = 0;

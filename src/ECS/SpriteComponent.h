@@ -25,7 +25,7 @@ public:
 		this->scale = _scale;
 		this->flipped = _flipped;
 	}
-	void onUserUpdate(float elapsedTime, olc::PixelGameEngine* context) override {
+	void onUserUpdate(float elapsedTime, MirrorMages* context) override {
 		context->DrawPartialSprite({ (int)position->x(), (int)position->y() }, sprite, { 0, 0 }, { 8, 8 }, scale,flipped);
 	}
 	void init() override {
