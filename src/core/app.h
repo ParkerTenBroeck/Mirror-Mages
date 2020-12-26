@@ -1,19 +1,19 @@
+#pragma once
 #include "extern/olc/include/olcPixelGameEngine.h"
+#include "game/game.h"
+//#include "../../extern/olc/include/olcPixelGameEngine.h"
 
-	#ifndef MIRROR_MAGES
-	#define MIRROR_MAGES
-
-#define OLC_PGE_APPLICATION
-
-class MirrorMages : public olc::PixelGameEngine
+class App : public olc::PixelGameEngine
 {
 private:
-	olc::Sprite* characterSpriteSheet = nullptr;
 
-	olc::Sprite* level = nullptr;
+	//Scene scene;
 
-	olc::Sprite* sprLightningShade = nullptr;
-	olc::Decal* decLightningShade = nullptr;
+//	olc::Sprite* characterSpriteSheet = nullptr;
+
+//	olc::Sprite* levelSprite = nullptr;
+//	olc::Decal* levelDecal = nullptr;
+	Game game;
 
 	uint8_t backgroundLayer;
 	uint8_t tileLayer;
@@ -23,14 +23,14 @@ private:
 	uint8_t effectLayer;
 
 public:
-	MirrorMages();
+	App();
 
 public:
 
 
 	bool OnUserCreate() override;
 
+
 	bool OnUserUpdate(float fElapsedTime) override;
 };
 
-#endif

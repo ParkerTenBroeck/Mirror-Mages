@@ -1,5 +1,6 @@
 #pragma once
-#include "random.h"
+#include "util/random.h"
+#include "common.h"
 
 class LightningBolt {
 public:

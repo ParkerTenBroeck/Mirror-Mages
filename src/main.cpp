@@ -1,14 +1,14 @@
 #pragma once
-#include "MirrorMages.h"
-
-
+#define OLC_PGE_APPLICATION
+#include "core/app.h"
 
 int main()
 {
-	MirrorMages mirrorMage;
-	if (mirrorMage.Construct(256, 240, 4, 4))
-	if (mirrorMage.Construct(256, 144, 5, 5, false, true))
-		mirrorMage.Start();
+	
+	App app;
+	if (app.Construct(256, 240, 4, 4))
+	if (app.Construct(256, 144, 5, 5, false, true))
+		app.Start();
 
 	return 0;
-}
+} 
