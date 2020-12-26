@@ -15,13 +15,6 @@ private:
 //	olc::Decal* levelDecal = nullptr;
 	Game game;
 
-	uint8_t backgroundLayer;
-	uint8_t tileLayer;
-	uint8_t decorationLayer;
-	uint8_t lightningLayer;
-	uint8_t entityLayer;
-	uint8_t effectLayer;
-
 public:
 	App();
 

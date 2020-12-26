@@ -24,22 +24,22 @@ namespace PlayerFactory
         //transform->location.x += 10 * fElapsedTime;
 
         if (Input::IsKeyHeld(olc::Key::W)) {
-            transform->location.y -= 30 * fElapsedTime;
+            transform->location.y -= 30.0f * fElapsedTime;
         }
         if (Input::IsKeyHeld(olc::Key::S)) {
-            transform->location.y += 30 * fElapsedTime;
+            transform->location.y += 30.0f * fElapsedTime;
         }
         if (Input::IsKeyHeld(olc::Key::A)) {
-            transform->location.x -= 30 * fElapsedTime;
+            transform->location.x -= 30.0f * fElapsedTime;
         }
         if (Input::IsKeyHeld(olc::Key::D)) {
-            transform->location.x += 30 * fElapsedTime;
+            transform->location.x += 30.0f * fElapsedTime;
         }
         if (Input::IsKeyHeld(olc::Z)) {
-            transform->rot += 0.5 * fElapsedTime;
+            transform->rot += 0.5f * fElapsedTime;
         }
         if (Input::IsKeyHeld(olc::X)) {
-            transform->rot -= 0.5 * fElapsedTime;
+            transform->rot -= 0.5f * fElapsedTime;
         }
         return true;
     }
@@ -55,7 +55,7 @@ namespace PlayerFactory
         h = h - ((int)h);
         h = h * 360.0f;
 
-        double      hh, p, q, t, ff;
+        float      hh, p, q, t, ff;
         long        i;
 
         struct rgb {
@@ -66,16 +66,16 @@ namespace PlayerFactory
         rgb  out;
 
         if (s <= 0.0) {       // < is bogus, just shuts up warnings
-            return olc::Pixel(v * 255, v * 255, v * 255);
+            return olc::Pixel((int)(v * 255), (int)(v * 255), (int)(v * 255));
         }
         hh = h;
-        if (hh >= 360.0) hh = 0.0;
-        hh /= 60.0;
+        if (hh >= 360.0f) hh = 0.0f;
+        hh /= 60.0f;
         i = (long)hh;
         ff = hh - i;
-        p = v * (1.0 - s);
-        q = v * (1.0 - (s * ff));
-        t = v * (1.0 - (s * (1.0 - ff)));
+        p = v * (1.0f - s);
+        q = v * (1.0f - (s * ff));
+        t = v * (1.0f - (s * (1.0f - ff)));
 
         switch (i) {
         case 0:
@@ -111,7 +111,7 @@ namespace PlayerFactory
             out.b = q;
             break;
         }
-        return olc::Pixel(out.r * 255, out.g * 255, out.b * 255, a * 255);
+        return olc::Pixel((int)(out.r * 255),(int)(out.g * 255),(int)(out.b * 255),(int)(a * 255));
     }
 
 

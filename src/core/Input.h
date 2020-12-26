@@ -1,5 +1,5 @@
 #pragma once
-#include "common.h"
+#include "extern/olc/include/olcPixelGameEngine.h"
 
 namespace Input
 {
