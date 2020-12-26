@@ -1,13 +1,13 @@
 #pragma once
 
 #include "extern/entt/include/entt.hpp"
-#include "Scene.h"
+#include "IScene.h"
 
 class Entity {
 
 public:
 	Entity() = default;
-	Entity(entt::entity handle, Scene* scene);
+	Entity(entt::entity handle, IScene* scene);
 	Entity(const Entity& other) = default;
 
 	template<typename T, typename... Args>
@@ -40,5 +40,5 @@ public:
 	operator bool() const { return m_EntityHandle != entt::null; }
 private:
 	entt::entity m_EntityHandle{ entt::null };
-	Scene* m_Scene;
+	IScene* m_Scene;
 };

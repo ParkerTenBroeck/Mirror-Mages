@@ -11,14 +11,9 @@ public:
 	//Scene();
 	//virtual ~Scene();
 
-	bool OnStart(olc::PixelGameEngine* context);
-	bool OnUpdate(float fElapsedTime, olc::PixelGameEngine* context);
+	bool OnStart();
+	bool OnUpdate(float fElapsedTime);
 	bool OnStop();
 	//temp
-	Entity CreateEntity();
-
-	//entt::registry& Reg() { return m_Registry; }
-
-	entt::registry m_Registry;
 
 };

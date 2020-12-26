@@ -10,13 +10,8 @@
 	//idk how to clean up ;(
 //}
 
-Entity Scene::CreateEntity() {
-	Entity entity = { m_Registry.create(), this };
-	return entity;
-}
 
-
-bool Scene::OnStart(olc::PixelGameEngine* context) {
+bool Scene::OnStart() {
 	Entity e = PlayerFactory::MakePlayer(this, 0);
 	e.AddComponent<CameraComponent>();
 	return true;
@@ -26,7 +21,7 @@ bool Scene::OnStop() {
 	return true;
 }
 
-bool Scene::OnUpdate(float fElapsedTime, olc::PixelGameEngine* context) {
+bool Scene::OnUpdate(float fElapsedTime) {
 
 	if (Input::IsKeyHeld(olc::Key::E)) {
 		static int count = 1;
@@ -39,10 +34,8 @@ bool Scene::OnUpdate(float fElapsedTime, olc::PixelGameEngine* context) {
 
 	NativeScriptingSystem::OnUpdate(this, fElapsedTime);
 
-
-
 	//Rendering
-	Rendering2DSystem::OnUpdate(this, context);
+	Rendering2DSystem::OnUpdate(this);
 
 	return true;
 }

@@ -35,4 +35,23 @@ namespace Renderer
 		data.tileLayer = CreateLayer();
 		data.backgroundLayer = CreateLayer();
 	}
+
+	int ScreenWidth() {
+		return data.renderer->ScreenWidth();
+	}
+
+	int ScreenHeight() {
+		return data.renderer->ScreenHeight();
+	}
+
+	//template<typename... Args>
+	void DrawPartialDecal(olc::vf2d pos, olc::vf2d size, olc::Decal* decal, olc::vf2d source_pos, olc::vf2d source_size, olc::Pixel tint) {
+		return data.renderer->DrawPartialDecal(pos, size, decal, source_pos, source_size, tint);
+		//data.renderer->DrawPartialDecal();
+	}
+
+
+	void DrawPartialRotatedDecal(olc::vf2d pos, olc::Decal* decal, const float fAngle, olc::vf2d center, olc::vf2d source_pos, olc::vf2d source_size, olc::vf2d scale, const olc::Pixel tint) {
+		return data.renderer->DrawPartialRotatedDecal(pos,decal,fAngle,center,source_pos,source_size,scale,tint);
+	}
 }

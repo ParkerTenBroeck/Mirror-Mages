@@ -5,11 +5,11 @@
 
 bool Game::init() {
 	scene = new Scene();
-	scene->OnStart(nullptr);
+	scene->OnStart();
 	return true;
 }
 
-bool Game::onUserUpdate(float fElapsedTime, olc::PixelGameEngine* context) {
-	scene->OnUpdate(fElapsedTime, context);
+bool Game::OnUpdate(float fElapsedTime) {
+	scene->OnUpdate(fElapsedTime);
 	return true;
 }

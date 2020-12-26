@@ -19,7 +19,7 @@
 
 	bool App::OnUserUpdate(float fElapsedTime)
 	{
-		if (game.onUserUpdate(fElapsedTime, this)) {
+		if (game.OnUpdate(fElapsedTime)) {
 			return true;
 		}
 		else {

@@ -6,7 +6,7 @@
 class Game {
 public:
 	bool init();
-	bool onUserUpdate(float fElapstedTime, olc::PixelGameEngine* context);
+	bool OnUpdate(float fElapstedTime);
 
 private:
 //	bool logic(float fElapstedTime);

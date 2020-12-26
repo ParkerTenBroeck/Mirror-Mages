@@ -1,5 +1,6 @@
 #pragma once
 #include "ECS/components/components.h"
+#include "core/Renderer.h"
 
 namespace Rendering2DSystem
 {
@@ -31,7 +32,7 @@ namespace Rendering2DSystem
 		CameraComponent cameraComp;
 	};
 
-	static inline auto FetchMainCamera(Scene* scene, olc::PixelGameEngine* context) {
+	static inline auto FetchMainCamera(Scene* scene) {
 		TransformComponent cameraTransform;
 		CameraComponent camera;
 		{
@@ -45,7 +46,7 @@ namespace Rendering2DSystem
 					//mainCamera = &camera.Camera;
 					cameraTransform = transform;
 					camera = cam;
-					camera.size = { (float)context->ScreenWidth(), (float)context->ScreenHeight() };
+					camera.size = { (float)Renderer::ScreenWidth(), (float)Renderer::ScreenHeight() };
 					break;
 				}
 			}
@@ -54,7 +55,7 @@ namespace Rendering2DSystem
 		return Camera{ cameraTransform, camera };
 	}
 
-	static inline void RenderTileMaps(Scene* scene, olc::PixelGameEngine* context, Camera cam) {
+	static inline void RenderTileMaps(Scene* scene, Camera cam) {
 
 		static olc::Sprite* levelSprite = new olc::Sprite("res\\moc_level.png");
 		static olc::Decal* levelDecal = new olc::Decal(levelSprite);
@@ -68,14 +69,19 @@ namespace Rendering2DSystem
 					cam.cameraComp.size)) {
 					continue;
 				}
-
-				context->DrawPartialDecal({ (float)x * 8 - cam.transformComp.location.x,(float)y * 8 - cam.transformComp.location.y },
-					{ 8,8 }, levelDecal, { (float)x * 8,(float)y * 8 }, { 8, 8 });
+				//{ (float)x * 8.0f - cam.transformComp.location.x,(float)y * 8.0f - cam.transformComp.location.y }
+				
+				Renderer::DrawPartialDecal(
+					(olc::vf2d{ (float)x, (float)y } * olc::vf2d{8.0f, 8.0f} - cam.transformComp.location),
+					olc::vf2d{ 8.0f,8.0f }, 
+					levelDecal, 
+					olc::vf2d{ (float)x * 8.0f,(float)y * 8.0f },
+					olc::vf2d{ 8.0f, 8.0f });
 			}
 		}
 	}
 
-	inline void RenderSprites(Scene* scene, olc::PixelGameEngine* context, Camera cam) {
+	inline void RenderSprites(Scene* scene, Camera cam) {
 
 		auto view = scene->m_Registry.view<TransformComponent, SpriteComponent>();
 		for (auto entity : view)
@@ -89,7 +95,7 @@ namespace Rendering2DSystem
 			}
 
 			if (trans.rot < 0.01 || trans.rot > -0.01) { //no rotation
-				context->DrawPartialDecal(
+				Renderer::DrawPartialDecal(
 					trans.location - cam.transformComp.location,
 					sprite.size * trans.scale,
 					sprite.decal,
@@ -98,7 +104,7 @@ namespace Rendering2DSystem
 					sprite.tint);
 			}
 			else {
-				context->DrawPartialRotatedDecal(
+				Renderer::DrawPartialRotatedDecal(
 					trans.location - cam.transformComp.location,
 					sprite.decal,
 					trans.rot,
@@ -111,14 +117,14 @@ namespace Rendering2DSystem
 		}
 	}
 
-	inline void OnUpdate(Scene* scene, olc::PixelGameEngine* context)
+	inline void OnUpdate(Scene* scene)
 	{
 		//fetch camera
-		auto cam = FetchMainCamera(scene, context);
+		auto cam = FetchMainCamera(scene);
 
-		RenderTileMaps(scene, context, cam);
+		RenderTileMaps(scene, cam);
 
 		//Sprite
-		RenderSprites(scene, context, cam);
+		RenderSprites(scene, cam);
 	}
 }
