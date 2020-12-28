@@ -6,6 +6,9 @@
 
 namespace Rendering2DSystem 
 {
+	int drawnDecals = 0;
+
+
 	static inline olc::vf2d Clamp(olc::vf2d val, olc::vf2d min, olc::vf2d max)
 	{
 		return { std::clamp(val.x, min.x, max.x), std::clamp(val.y, min.y, max.y) };
@@ -115,7 +118,7 @@ namespace Rendering2DSystem
 			points[i] = points[i] * cam.cameraComp.scale;
 			points[i] += cam.centerOffset;
 		}
-
+		drawnDecals++;
 		Renderer::DrawPartialWarpedDecal(decal, points, source_pos, source_size, tint);
 	}
 
@@ -218,20 +221,28 @@ namespace Rendering2DSystem
 		static olc::Sprite* levelSprite = new olc::Sprite("res\\moc_level.png");
 		static olc::Decal* levelDecal = new olc::Decal(levelSprite);
 
-	for (int y = 0; y < levelSprite->height / 8; y++) {
+		float minValX = std::clamp(cam.scaledTopViewPortBounds.x, 0.0f, (float)levelSprite->width);
+		float minValY = std::clamp(cam.scaledTopViewPortBounds.y, 0.0f, (float)levelSprite->height);
+
+		float maxValX = std::clamp(cam.scaledBottomViewPortBounds.x, 0.0f, (float)levelSprite->width);
+		float maxValY = std::clamp(cam.scaledBottomViewPortBounds.y, 0.0f, (float)levelSprite->height);
+
+	for (int y = minValY / 8; y < maxValY / 8; y++) {
 
 		float tempY = y * 8;
 
-		for (int x = 0; x < levelSprite->width / 8; x++) {
+		for (int x = minValX / 8; x < maxValX / 8; x++) {
 
 			float tempX = x * 8;
 
-				if (!IsVisible({ tempX, tempY },
-					{ 8.0f + tempX ,8.0f  + tempY },
-					cam.scaledTopViewPortBounds,
-					cam.scaledBottomViewPortBounds)) {
-					continue;
-				}
+			
+			//	if (!IsVisible({ tempX, tempY },
+			//		{ 8.0f + tempX ,8.0f  + tempY },
+			//		cam.scaledTopViewPortBounds,
+			//		cam.scaledBottomViewPortBounds)) {
+			//		continue;
+			//	}
+				
 
 				DrawDecal(
 					olc::vf2d{tempX, tempY} - cam.centerLocation,
@@ -303,6 +314,8 @@ namespace Rendering2DSystem
 
 	void OnUpdate(IScene* scene)
 	{
+		drawnDecals = 0;
+		Renderer::SetBackgroundLayer();
 		//fetch camera
 		auto cam = FetchMainCamera(scene);
 
@@ -310,5 +323,17 @@ namespace Rendering2DSystem
 
 		//Sprite
 		RenderSprites(scene, cam);
+
+
+		Renderer::SetDebugLayer();
+
+		Renderer::Clear(olc::BLANK);
+		std::stringstream ss;
+		ss << drawnDecals << "_Decals_Drawn";
+		std::string s;
+		ss >> s;
+		//if(Input::IsKeyHeld(olc::SPACE)){
+		Renderer::DrawString({0,0 }, s, olc::WHITE, 1.0f);
+		//}
 	}
 }

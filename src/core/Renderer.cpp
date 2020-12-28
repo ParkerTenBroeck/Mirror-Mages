@@ -11,6 +11,7 @@ namespace Renderer
 		uint8_t entityLayer;
 		uint8_t effectLayer;
 		uint8_t topDecorationLayer;
+		uint8_t debugLayer;
 	};
 
 	static RendererData data;
@@ -28,6 +29,7 @@ namespace Renderer
 
 		renderer->Clear(olc::BLANK);
 
+		data.debugLayer = CreateLayer();
 		data.topDecorationLayer = CreateLayer();
 		data.effectLayer = CreateLayer();
 		data.entityLayer = CreateLayer();
@@ -136,7 +138,22 @@ namespace Renderer
 		data.renderer->DrawPartialWarpedDecal(decal, points, source_pos, source_size, tint);
 	}
 
+	void DrawString(olc::vi2d pos, const std::string &message,olc::Pixel col, float scale) {
+		data.renderer->DrawString(pos, message, col, scale);
+	}
+
 	void SetTargetLayer(uint8_t _layer) {
 		data.renderer->SetDrawTarget(_layer);
+	}
+
+	void Clear(olc::Pixel color) {
+		data.renderer->Clear(color);
+	}
+
+	void SetDebugLayer(){
+		SetTargetLayer(data.debugLayer);
+	}
+	void SetBackgroundLayer() {
+		SetTargetLayer(data.backgroundLayer);
 	}
 }

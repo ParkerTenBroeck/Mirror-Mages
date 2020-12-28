@@ -10,9 +10,11 @@
 	//idk how to clean up ;(
 //}
 
+//int entities = 0;
 
 bool Scene::OnStart() {
 	Entity e = PlayerFactory::MakePlayer(this, 0);
+	//entities++;
 	return true;
 }
 
@@ -23,11 +25,10 @@ bool Scene::OnStop() {
 bool Scene::OnUpdate(float fElapsedTime) {
 
 	if (Input::IsKeyHeld(olc::Key::P)) {
-		static int count = 1;
 		for (int i = 0; i < 100; i++) {
 			Entity e = PlayerFactory::MakeEnemy(this);
 			e.GetComponent<TransformComponent>().location = {RandomRange(0.0f, 256.0f), RandomRange(0.0f,144.0f)};
-			count++;
+			//entities++;
 		}
 	}
 

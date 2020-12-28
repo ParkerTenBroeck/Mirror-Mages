@@ -21,4 +21,11 @@ namespace Renderer
 	olc::vf2d RotatePoint(olc::vf2d p, olc::vf2d o, float fAngle);
 
 	olc::vf2d RotatePoint(olc::vf2d p, olc::vf2d o, float s, float c);
+
+	void DrawString(olc::vi2d pos, const std::string& message, olc::Pixel col = olc::WHITE, float scale = 1.0f);
+
+	void Clear(olc::Pixel color);
+
+	void SetDebugLayer();
+	void SetBackgroundLayer();
 }
