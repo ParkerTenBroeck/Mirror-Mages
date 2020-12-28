@@ -1,6 +1,4 @@
 #include "game.h"
-
-#include "ECS/components/components.h"
 #include "scene/Scene.h"
 
 bool Game::init() {

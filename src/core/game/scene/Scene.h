@@ -1,6 +1,4 @@
 #pragma once
-#include "extern/entt/include/entt.hpp"
-////#include "common.h"
 #include "IScene.h"
 
 class Entity;

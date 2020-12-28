@@ -1,6 +1,5 @@
 #include "core/game/scene/ScriptableEntity.h"
 
-
 struct NativeScriptComponent
 {
 	ScriptableEntity* Instance = nullptr;

@@ -23,8 +23,8 @@ public:
 		LineSegment(olc::vf2d _source, olc::vf2d _dest, olc::vf2d normal) {
 				source = _source;
 				dest = _dest;
-				sourceOff = {_source.x + random(0.5, -0.5), _source.y + random(0.5, -0.5)};
-				destOff = { _dest.x + random(0.5, -0.5), _dest.y + random(0.5, -0.5)};
+				sourceOff = {_source.x + Random(0.5, -0.5), _source.y + Random(0.5, -0.5)};
+				destOff = { _dest.x + Random(0.5, -0.5), _dest.y + Random(0.5, -0.5)};
 		}
 	};
 
@@ -124,7 +124,7 @@ public:
 			// defines an envelope. Points near the middle of the bolt can be further from the central line.
 			float envelope = pos > 0.95f ? 20 * (1 - pos) : 1;
 
-			float displacement = random(-Sway, Sway);
+			float displacement = Random(-Sway, Sway);
 			displacement -= (displacement - prevDisplacement) * (1 - scale);
 			displacement *= envelope;
 

@@ -3,7 +3,8 @@
 #include "core/game/scene/Scene.h"
 #include "core/game/scene/Entity.h"
 #include "PlayerFactory.h"
-//#include ""
+
+#include "util/Random.h"
 
 
 
@@ -19,27 +20,37 @@ namespace PlayerFactory
     bool PlayerScript::OnUpdate(float fElapsedTime)
     {
         auto transform = &GetComponent<TransformComponent>();
-        auto player = &GetComponent<PlayerComponent>();
+        auto camera = &GetComponent<CameraComponent>();
         //std::cout << "Updating " << player->player << "\n";
         //transform->location.x += 10 * fElapsedTime;
 
         if (Input::IsKeyHeld(olc::Key::W)) {
-            transform->location.y -= 30.0f * fElapsedTime;
+            transform->location.y -= 40.0f * fElapsedTime;
         }
         if (Input::IsKeyHeld(olc::Key::S)) {
-            transform->location.y += 30.0f * fElapsedTime;
+            transform->location.y += 40.0f * fElapsedTime;
         }
         if (Input::IsKeyHeld(olc::Key::A)) {
-            transform->location.x -= 30.0f * fElapsedTime;
+            transform->location.x -= 40.0f * fElapsedTime;
         }
         if (Input::IsKeyHeld(olc::Key::D)) {
-            transform->location.x += 30.0f * fElapsedTime;
+            transform->location.x += 40.0f * fElapsedTime;
         }
         if (Input::IsKeyHeld(olc::Z)) {
-            transform->rot += 0.5f * fElapsedTime;
+            camera->fAngleOffset += 0.5f * fElapsedTime;
         }
         if (Input::IsKeyHeld(olc::X)) {
-            transform->rot -= 0.5f * fElapsedTime;
+            camera->fAngleOffset -= 0.5f * fElapsedTime;
+        }
+        if (Input::IsKeyHeld(olc::O)) {
+            camera->fAngleOffset = RandomRange(-0.04f,0.04f);
+            camera->offset = olc::vf2d{ RandomRange(-2.0f,2.0f), RandomRange(-2.0f,2.0f) };
+        }
+        if (Input::IsKeyHeld(olc::Q)) {
+            camera->scale += olc::vf2d{1.0f, 1.0f} * fElapsedTime;
+        }
+        if (Input::IsKeyHeld(olc::E)) {
+            camera->scale -= olc::vf2d{1.0f, 1.0f} * fElapsedTime;
         }
         return true;
     }
@@ -126,6 +137,7 @@ namespace PlayerFactory
         sp->tint = hsv2rgb(player / 1024.0f, 1.0f, 1.0f);
         //std::cout << (int)sp->tint.r <<  "\n";
         e.AddComponent<NativeScriptComponent>().Bind<PlayerScript>();
+        e.AddComponent<CameraComponent>();
         return e;
     }
 

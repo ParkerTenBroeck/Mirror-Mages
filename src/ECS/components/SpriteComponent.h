@@ -1,5 +1,5 @@
 #pragma once
-#include "common.h"
+#include "extern/olc/include/olcPixelGameEngine.h"
 
 struct SpriteComponent {
 	olc::Sprite* sprite = nullptr;
@@ -8,8 +8,8 @@ struct SpriteComponent {
 	olc::vi2d origin = {0,0};
 	olc::vi2d size = {0,0};
 	olc::Pixel tint = olc::WHITE;
-	bool flippedH;
-	bool flippedV;
+	bool flippedH = false;
+	bool flippedV = false;
 
 	SpriteComponent() {
 
